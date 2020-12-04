@@ -53,6 +53,8 @@ public class ChessGame {
             state = Utils.getChessInstancePosition(probability, seed);
         }
 
+        
+      
         Utils.printBoard(state);
 
         if (color.equals("white") || color.equals("black")) {
