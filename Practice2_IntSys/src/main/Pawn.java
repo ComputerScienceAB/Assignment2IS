@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package main;
+
+import main.*;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author javis
+ */
+public class Pawn extends Piece {
+    
+    public Pawn(int color){
+        this.color = color;
+        if(this.color == 0){
+            this.type = Utils.wPawn;
+        }else this.type = Utils.bPawn;
+    }
+	
+
+	public ArrayList<Action> getPossibleActions(State st){
+		
+            int r_agent = this.piecePosition.row;
+            int c_agent = this.piecePosition.col;
+
+            ArrayList<Action> list = new ArrayList<Action>(4);
+            Action action = null;
+            Position origin = this.piecePosition;
+
+            if(r_agent == 0){
+                    if(st.m_board[r_agent+2][c_agent] == Utils.empty && st.m_board[r_agent+1][c_agent] == Utils.empty){
+                            action = new Action(origin, new Position(r_agent+2,c_agent));
+                            list.add(action);
+                    }		
+            }
+
+            if(st.m_board[r_agent+1][c_agent] == Utils.empty){
+                    action = new Action(origin, new Position(r_agent+1,c_agent));
+                    list.add(action);
+            }
+            if((c_agent-1>=0) && (st.m_board[r_agent+1][c_agent-1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent+1][c_agent-1])!= this.color)){
+                    action = new Action(origin, new Position(r_agent+1,c_agent-1));
+                    list.add(action);
+            }
+            if((c_agent+1<st.m_boardSize) && (st.m_board[r_agent+1][c_agent+1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent+1][c_agent+1]) != this.color)){
+                    action = new Action(origin, new Position(r_agent+1,c_agent+1));
+                    list.add(action);
+            }
+
+            //System.out.println(list.size());
+            return list;
+		
+	}
+}
