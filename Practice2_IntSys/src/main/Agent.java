@@ -24,6 +24,7 @@ public class Agent {
         }
         this.remainingMoves = rM;
         this.dummy = d;
+        
     }
     
     
