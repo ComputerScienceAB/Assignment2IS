@@ -15,8 +15,9 @@ public class Agent {
     int color;
     int remainingMoves;
     boolean dummy;
+    String searchStrategy;
 
-    public Agent(String c, int rM, boolean d) {        
+    public Agent(String c, int rM, boolean d, String ss) {        
         if (c.equals("white")) {
             this.color = 0;
         } else {
@@ -24,6 +25,7 @@ public class Agent {
         }
         this.remainingMoves = rM;
         this.dummy = d;
+        this.searchStrategy = ss;
     }
     
     

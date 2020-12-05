@@ -12,7 +12,7 @@ package main;
 public class ChessGame {
 
     public static void main(String args[]) {
-        String method;
+        String method = null;
         String initialTranslator;
         boolean initial = true;
         int depth;
@@ -55,15 +55,35 @@ public class ChessGame {
 
         Utils.printBoard(state);
 
-        if (color.equals("white") || color.equals("black")) {
-            player1 = new Agent(color, remainingMoves, false);
-        } else if (color.equals("both")) {
-            player1 = new Agent("white", remainingMoves, false);
-            player2 = new Agent("black", remainingMoves, false);
-        }else{
-            player1 = new Agent("white", remainingMoves, true);
-            player2 = new Agent("black", remainingMoves, true);
+        switch (color) {
+            case "white":
+                player1 = new Agent(color, remainingMoves, false, method);
+                break;
+            case "black":
+                player2 = new Agent(color, remainingMoves, false, method);
+                break;
+            case "both":
+                player1 = new Agent("white", remainingMoves, false, method);
+                player2 = new Agent("black", remainingMoves, false, method);
+                break;
+            default:
+                player1 = new Agent("white", remainingMoves, true, method);
+                player2 = new Agent("black", remainingMoves, true, method);
+                break;
         }
+        
+        System.out.println("White ones move first");
+        while(true){
+            Utils.printBoard(state);
+            switch(color){
+                case "white":
+                    System.out.println("Player 1 (AI) moves");
+                    //state = player1.move(state);
+                    System.out.println("Player 2 (human), it's your turn");
+            }
+            
+        }
+        
 
     }
 
