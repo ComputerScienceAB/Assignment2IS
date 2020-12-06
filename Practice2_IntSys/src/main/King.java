@@ -18,13 +18,14 @@ import java.util.ArrayList;
  */
 public class King extends Piece {
 
-    public King(int color) {
+    public King(int color, Position pos) {
         this.color = color;
         if (this.color == 0) {
             this.type = Utils.wKing;
         } else {
             this.type = Utils.bKing;
         }
+        this.piecePosition = pos;
     }
 
     public ArrayList<Action> getPossibleActions(State st) {
