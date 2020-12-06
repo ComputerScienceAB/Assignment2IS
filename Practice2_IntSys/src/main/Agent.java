@@ -9,10 +9,8 @@ package main;
  *
  * @author Javier
  */
-public class Agent {
+public class Agent extends Player{
 
-    //0 = White; 1 = Black
-    int color;
     int remainingMoves;
     boolean dummy;
     String searchStrategy;
@@ -26,6 +24,11 @@ public class Agent {
         this.remainingMoves = rM;
         this.dummy = d;
         this.searchStrategy = ss;
+    }
+    
+    @Override
+    public State Move(State st){
+        return null;
     }
     
     

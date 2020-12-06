@@ -15,11 +15,12 @@ import java.util.ArrayList;
  */
 public class Pawn extends Piece {
     
-    public Pawn(int color){
+    public Pawn(int color, Position pos){
         this.color = color;
         if(this.color == 0){
             this.type = Utils.wPawn;
         }else this.type = Utils.bPawn;
+        this.piecePosition = pos;
     }
 	
 

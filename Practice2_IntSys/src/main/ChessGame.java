@@ -21,10 +21,11 @@ public class ChessGame {
         double probability = 0.0;
         int seed = -1;
 
-        Agent player1 = null;
-        Agent player2 = null;
+        Player player1 = null;
+        Player player2 = null;
 
         State state;
+
 
         if ((args.length == 5) || (args.length == 7)) {
             method = args[0];
@@ -53,13 +54,13 @@ public class ChessGame {
             state = Utils.getChessInstancePosition(probability, seed);
         }
 
-        Utils.printBoard(state);
-
         switch (color) {
             case "white":
                 player1 = new Agent(color, remainingMoves, false, method);
+                player2 = new Human("black");
                 break;
             case "black":
+                player1 = new Human("white");
                 player2 = new Agent(color, remainingMoves, false, method);
                 break;
             case "both":
@@ -67,23 +68,48 @@ public class ChessGame {
                 player2 = new Agent("black", remainingMoves, false, method);
                 break;
             default:
-                player1 = new Agent("white", remainingMoves, true, method);
+                player1 = new Agent("white", remainingMoves, false, method);
                 player2 = new Agent("black", remainingMoves, true, method);
                 break;
         }
-        
+
         System.out.println("White ones move first");
-        while(true){
+        while (true) {
             Utils.printBoard(state);
-            switch(color){
+            switch (color) {
                 case "white":
                     System.out.println("Player 1 (AI) moves");
-                    //state = player1.move(state);
+                    //state = player1.Move(state);
+                    //state.isFinal();
                     System.out.println("Player 2 (human), it's your turn");
+                    state = player2.Move(state);
+                    //state.isFinal();
+                    break;
+                case "black":
+                    System.out.println("Player 1 (human), it's your turn");
+                    state = player1.Move(state);
+                    //state.isFinal();
+                    System.out.println("Player 2 (AI) moves");
+                    //state = player2.Move(state);
+                    //state.isFinal();
+                    break;
+                case "both":
+                    System.out.println("Player 1 (AI) moves");
+                    //state = player1.Move(state);
+                    //state.isFinal();
+                    System.out.println("Player 2 (AI) moves");
+                    //state = player2.Move(state);
+                    //state.isFinal();
+                    break;
+                case "dummy":
+                    System.out.println("Player 1 (AI) moves");
+                    //state = player1.Move(state);
+                    //state.isFinal();
+                    System.out.println("Player 2 (dummy) does nothing");
+                    break;
             }
-            
+
         }
-        
 
     }
 
