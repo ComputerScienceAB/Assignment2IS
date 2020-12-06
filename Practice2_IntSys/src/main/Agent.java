@@ -9,14 +9,13 @@ package main;
  *
  * @author Javier
  */
-public class Agent {
+public class Agent extends Player{
 
-    //0 = White; 1 = Black
-    int color;
     int remainingMoves;
     boolean dummy;
+    String searchStrategy;
 
-    public Agent(String c, int rM, boolean d) {        
+    public Agent(String c, int rM, boolean d, String ss) {        
         if (c.equals("white")) {
             this.color = 0;
         } else {
@@ -24,7 +23,12 @@ public class Agent {
         }
         this.remainingMoves = rM;
         this.dummy = d;
-        
+        this.searchStrategy = ss;
+    }
+    
+    @Override
+    public State Move(State st){
+        return null;
     }
     
     
