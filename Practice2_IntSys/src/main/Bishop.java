@@ -10,11 +10,12 @@ import java.util.ArrayList;
 
 public class Bishop extends Piece {
     
-    public Bishop(int color){
+    public Bishop(int color, Position pos){
         this.color = color;
         if(this.color == 0){
             this.type = Utils.wBishop;
         }else this.type = Utils.bBishop;
+        this.piecePosition = pos;
     }
 	
 

@@ -13,11 +13,12 @@ import java.util.ArrayList;
  */
 public class Queen extends Piece {
     
-    public Queen(int color){
+    public Queen(int color, Position pos){
         this.color = color;
         if(this.color == 0){
             this.type = Utils.wQueen;
         }else this.type = Utils.bQueen;
+        this.piecePosition = pos;
     }
 	
 

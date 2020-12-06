@@ -11,17 +11,15 @@ package main;
  */
 public class Agent extends Player{
 
-    int remainingMoves;
     boolean dummy;
     String searchStrategy;
 
-    public Agent(String c, int rM, boolean d, String ss) {        
+    public Agent(String c, boolean d, String ss) {        
         if (c.equals("white")) {
             this.color = 0;
         } else {
             this.color = 1;
         }
-        this.remainingMoves = rM;
         this.dummy = d;
         this.searchStrategy = ss;
     }

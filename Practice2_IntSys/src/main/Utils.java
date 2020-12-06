@@ -46,6 +46,55 @@ public class Utils {
 
         return -1; //never arrives here, just to avoid compilation error
     }
+    
+    /**
+     * This method returns an object of a subclass of Piece from the integer id of a piece
+     * @param piece
+     * @param pos
+     * @return 
+     */
+    public static Piece getPiece(int piece, Position pos){
+        Piece p = null;
+        switch (piece) {
+            case Utils.wPawn:
+                p = new Pawn(0, pos);
+                break;
+            case Utils.wRook:
+                p = new Rook(0, pos);
+                break;
+            case Utils.wBishop:
+                p = new Bishop(0, pos);
+                break;
+            case Utils.wKnight:
+                p = new Knight(0, pos);
+                break;
+            case Utils.wQueen:
+                p = new Queen(0, pos);
+                break;
+            case Utils.wKing:
+                p = new King(0, pos);
+                break;
+            case Utils.bPawn:
+                p = new Pawn(1, pos);
+                break;
+            case Utils.bRook:
+                p = new Rook(1, pos);
+                break;
+            case Utils.bBishop:
+                p = new Bishop(1, pos);
+                break;
+            case Utils.bKnight:
+                p = new Knight(1, pos);
+                break;
+            case Utils.bQueen:
+                p = new Queen(1, pos);
+                break;
+            case Utils.bKing:
+                p = new King(1, pos);
+                break;
+        }
+        return p;
+    }
 
 
     /**

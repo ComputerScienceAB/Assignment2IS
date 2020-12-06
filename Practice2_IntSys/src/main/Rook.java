@@ -10,11 +10,12 @@ import java.util.ArrayList;
 
 public class Rook extends Piece {
     
-    public Rook(int color){
+    public Rook(int color, Position pos){
         this.color = color;
         if(this.color == 0){
             this.type = Utils.wRook;
         }else this.type = Utils.bRook;
+        this.piecePosition = pos;
     }
 	
     public ArrayList<Action> getPossibleActions(State st){

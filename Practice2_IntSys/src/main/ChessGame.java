@@ -56,20 +56,20 @@ public class ChessGame {
 
         switch (color) {
             case "white":
-                player1 = new Agent(color, remainingMoves, false, method);
+                player1 = new Agent(color, false, method);
                 player2 = new Human("black");
                 break;
             case "black":
                 player1 = new Human("white");
-                player2 = new Agent(color, remainingMoves, false, method);
+                player2 = new Agent(color, false, method);
                 break;
             case "both":
-                player1 = new Agent("white", remainingMoves, false, method);
-                player2 = new Agent("black", remainingMoves, false, method);
+                player1 = new Agent("white", false, method);
+                player2 = new Agent("black", false, method);
                 break;
             default:
-                player1 = new Agent("white", remainingMoves, false, method);
-                player2 = new Agent("black", remainingMoves, true, method);
+                player1 = new Agent("white", false, method);
+                player2 = new Agent("black", true, method);
                 break;
         }
 

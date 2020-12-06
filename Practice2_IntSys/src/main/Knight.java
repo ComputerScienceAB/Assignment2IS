@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 public class Knight extends Piece {
     
-    public Knight(int color){
+    public Knight(int color, Position pos){
         this.color = color;
         if(this.color == 0){
             this.type = Utils.wKnight;
         }else this.type = Utils.bKnight;
+        this.piecePosition = pos;
     }
     
     @Override

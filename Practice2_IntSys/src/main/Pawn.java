@@ -14,47 +14,70 @@ import java.util.ArrayList;
  * @author javis
  */
 public class Pawn extends Piece {
-    
-    public Pawn(int color, Position pos){
+
+    public Pawn(int color, Position pos) {
         this.color = color;
-        if(this.color == 0){
+        if (this.color == 0) {
             this.type = Utils.wPawn;
-        }else this.type = Utils.bPawn;
+        } else {
+            this.type = Utils.bPawn;
+        }
         this.piecePosition = pos;
     }
-	
 
-	public ArrayList<Action> getPossibleActions(State st){
-		
-            int r_agent = this.piecePosition.row;
-            int c_agent = this.piecePosition.col;
+    public ArrayList<Action> getPossibleActions(State st) {
 
-            ArrayList<Action> list = new ArrayList<Action>(4);
-            Action action = null;
-            Position origin = this.piecePosition;
+        int r_agent = this.piecePosition.row;
+        int c_agent = this.piecePosition.col;
 
-            if(r_agent == 0){
-                    if(st.m_board[r_agent+2][c_agent] == Utils.empty && st.m_board[r_agent+1][c_agent] == Utils.empty){
-                            action = new Action(origin, new Position(r_agent+2,c_agent));
-                            list.add(action);
-                    }		
-            }
+        ArrayList<Action> list = new ArrayList<Action>(4);
+        Action action = null;
+        Position origin = this.piecePosition;
 
-            if(st.m_board[r_agent+1][c_agent] == Utils.empty){
-                    action = new Action(origin, new Position(r_agent+1,c_agent));
+        if (this.color == 0) {
+            if (r_agent == 1) {
+                if (st.m_board[r_agent + 2][c_agent] == Utils.empty && st.m_board[r_agent + 1][c_agent] == Utils.empty) {
+                    action = new Action(origin, new Position(r_agent + 2, c_agent));
                     list.add(action);
-            }
-            if((c_agent-1>=0) && (st.m_board[r_agent+1][c_agent-1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent+1][c_agent-1])!= this.color)){
-                    action = new Action(origin, new Position(r_agent+1,c_agent-1));
-                    list.add(action);
-            }
-            if((c_agent+1<st.m_boardSize) && (st.m_board[r_agent+1][c_agent+1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent+1][c_agent+1]) != this.color)){
-                    action = new Action(origin, new Position(r_agent+1,c_agent+1));
-                    list.add(action);
+                }
             }
 
-            //System.out.println(list.size());
-            return list;
-		
-	}
+            if (st.m_board[r_agent + 1][c_agent] == Utils.empty) {
+                action = new Action(origin, new Position(r_agent + 1, c_agent));
+                list.add(action);
+            }
+            if ((c_agent - 1 >= 0) && (st.m_board[r_agent + 1][c_agent - 1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent + 1][c_agent - 1]) != this.color)) {
+                action = new Action(origin, new Position(r_agent + 1, c_agent - 1));
+                list.add(action);
+            }
+            if ((c_agent + 1 < st.m_boardSize) && (st.m_board[r_agent + 1][c_agent + 1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent + 1][c_agent + 1]) != this.color)) {
+                action = new Action(origin, new Position(r_agent + 1, c_agent + 1));
+                list.add(action);
+            }
+        } else {
+            if (r_agent == 6) {
+                if (st.m_board[r_agent - 2][c_agent] == Utils.empty && st.m_board[r_agent - 1][c_agent] == Utils.empty) {
+                    action = new Action(origin, new Position(r_agent - 2, c_agent));
+                    list.add(action);
+                }
+            }
+
+            if (st.m_board[r_agent - 1][c_agent] == Utils.empty) {
+                action = new Action(origin, new Position(r_agent - 1, c_agent));
+                list.add(action);
+            }
+            if ((c_agent - 1 >= 0) && (st.m_board[r_agent - 1][c_agent - 1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent - 1][c_agent - 1]) != this.color)) {
+                action = new Action(origin, new Position(r_agent - 1, c_agent - 1));
+                list.add(action);
+            }
+            if ((c_agent + 1 < st.m_boardSize) && (st.m_board[r_agent - 1][c_agent + 1] != Utils.empty) && (Utils.getColorPiece(st.m_board[r_agent - 1][c_agent + 1]) != this.color)) {
+                action = new Action(origin, new Position(r_agent - 1, c_agent + 1));
+                list.add(action);
+            }
+        }
+
+        //System.out.println(list.size());
+        return list;
+
+    }
 }
