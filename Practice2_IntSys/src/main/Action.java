@@ -7,6 +7,7 @@ public class Action {
 
     Position m_initPos = null;
     Position m_finalPos = null;
+    int value;
 
     public Action(Position p0, Position p1) {
         m_initPos = p0;
