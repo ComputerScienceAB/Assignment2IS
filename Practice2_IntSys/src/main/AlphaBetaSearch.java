@@ -13,16 +13,16 @@ import java.util.ArrayList;
  */
 public class AlphaBetaSearch extends MiniMaxSearch {
     
- 
+     int alpha, beta;
     
-    public AlphaBetaSearch(){
-        super();
+    public AlphaBetaSearch(int c){
+        super(c);
     }
     
     public Action AlphaBeta(State state){
         best = MaxValue(state, posInf, negInf);
-        for (int i = 0; i< actions.size(); i++){
-            if (actions.get(i).value == best) return actions.get(i);
+        for (int i = 0; i< totalPossibleActions.size(); i++){
+            if (totalPossibleActions.get(i).value == best) return totalPossibleActions.get(i);
         }
         return null; 
     } 
@@ -30,11 +30,25 @@ public class AlphaBetaSearch extends MiniMaxSearch {
     public int MaxValue(State state, int alpha, int beta){
         this.alpha = alpha;
         this.beta = beta;
-        actions = mPiece.getPossibleActions(state);
+        for(int i=0; i<state.m_boardSize;i++){
+            for(int j=0;j<state.m_boardSize;j++){
+                if(this.agentColor == 0){
+                    if((state.m_board[i][j] >= Utils.wPawn) && (state.m_board[i][j] <= Utils.wKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        this.totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                    }
+                }else{
+                    if((state.m_board[i][j] >= Utils.bPawn) && (state.m_board[i][j] <= Utils.bKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        this.totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                    }
+                }           
+            }
+        }
         if (state.isFinal()) return state.getUtility();
         best = negInf;
-        for (int i = 0; i < actions.size(); i++){
-            best = Math.max(Math.max(best, MinValue(state.applyAction(actions.get(i)))), Math.max(alpha, beta));
+        for (int i = 0; i < totalPossibleActions.size(); i++){
+            best = Math.max(Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.max(alpha, beta));
             if (best >= beta) return best;
             alpha = Math.max(alpha, best);
         }   
@@ -44,11 +58,25 @@ public class AlphaBetaSearch extends MiniMaxSearch {
     public int MinValue(State state, int alpha, int beta){
         this.alpha = alpha;
         this.beta = beta;
-        actions = mPiece.getPossibleActions(state);
+        for(int i=0; i<state.m_boardSize;i++){
+            for(int j=0;j<state.m_boardSize;j++){
+                if(this.agentColor == 0){
+                    if((state.m_board[i][j] >= Utils.bPawn) && (state.m_board[i][j] <= Utils.bKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        this.totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                    }
+                }else{
+                    if((state.m_board[i][j] >= Utils.wPawn) && (state.m_board[i][j] <= Utils.wKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        this.totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                    }
+                }           
+            }
+        }
         if (state.isFinal()) return state.getUtility();
         best = posInf;
-        for (int i = 0; i < actions.size(); i++){
-            best = Math.min(Math.min(best, MinValue(state.applyAction(actions.get(i)))), Math.min(alpha, beta));
+        for (int i = 0; i < totalPossibleActions.size(); i++){
+            best = Math.min(Math.min(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
             if (best <= beta) return best;
             alpha = Math.min(alpha, best);
         }   
