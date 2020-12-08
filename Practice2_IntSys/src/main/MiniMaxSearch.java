@@ -6,7 +6,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  *
@@ -54,7 +53,7 @@ public class MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return state.getUtility();
+        if (state.isFinal()) return getUtility(state);
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i))));
@@ -78,12 +77,39 @@ public class MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return state.getUtility();
+        if (state.isFinal()) return getUtility(state);
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i))));
         }
         return best;
+    }
+    
+    public int getUtility(State state){
+        int whitescore = 0;
+        int blackscore = 0;
+        for(int i = 0; i<state.m_boardSize; i++){
+            for(int j = 0; j<state.m_boardSize; j++){
+                if(state.m_board[i][j] != Utils.empty){
+                    if(state.m_board[i][j] >= Utils.wPawn && state.m_board[i][j] <= Utils.wKing){ //if the piece in that position is white
+                        if (state.m_board[i][j] == Utils.wPawn) whitescore += 1; 
+                        if (state.m_board[i][j] == Utils.wRook) whitescore += 5; 
+                        if (state.m_board[i][j] == Utils.wBishop) whitescore += 3; 
+                        if (state.m_board[i][j] == Utils.wKnight) whitescore += 3; 
+                        if (state.m_board[i][j] == Utils.wQueen) whitescore += 9; 
+                        if (state.m_board[i][j] == Utils.wKing) whitescore += 10000000; 
+                    }else{ //if piece is black
+                        if (state.m_board[i][j] == Utils.bPawn) blackscore += 1; 
+                        if (state.m_board[i][j] == Utils.bRook) blackscore += 5; 
+                        if (state.m_board[i][j] == Utils.bBishop) blackscore += 3; 
+                        if (state.m_board[i][j] == Utils.bKnight) blackscore += 3; 
+                        if (state.m_board[i][j] == Utils.bQueen) blackscore += 9; 
+                        if (state.m_board[i][j] == Utils.bKing) blackscore += 10000000; 
+                    }
+                }
+            }
+        }
+        return blackscore-whitescore;
     }
     
     

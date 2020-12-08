@@ -52,9 +52,6 @@ public class State {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public int getUtility(){
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
     
 

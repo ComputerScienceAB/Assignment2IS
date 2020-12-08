@@ -5,8 +5,6 @@
  */
 package main;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Usuario
@@ -45,7 +43,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return state.getUtility();
+        if (state.isFinal()) return getUtility(state);
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.max(Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.max(alpha, beta));
@@ -73,7 +71,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return state.getUtility();
+        if (state.isFinal()) return getUtility(state);
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.min(Math.min(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
