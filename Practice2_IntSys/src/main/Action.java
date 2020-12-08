@@ -42,6 +42,12 @@ public class Action {
         return ret;
     }
 
+    /**
+     * This method compares the action specified by the human player with the possible actions of the chosen piece, and returns true if it is legal
+     * @param st
+     * @param piece
+     * @return 
+     */
     public boolean isLegal(State st, int piece) {
         boolean ret = false;
         ArrayList<Action> possibleActions;
