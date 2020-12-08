@@ -47,6 +47,16 @@ public class State {
 
         return newState;
     }
+    
+    public boolean isFinal() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public int getUtility(){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
 
     /*@Override
     public boolean equals(Object obj){
@@ -66,4 +76,6 @@ public class State {
     public int hashCode() {
         return this.m_agentPos.col+this.m_agentPos.row;
     }*/
+
+    
 }
