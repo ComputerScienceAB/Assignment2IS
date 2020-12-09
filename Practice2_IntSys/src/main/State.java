@@ -57,11 +57,11 @@ public class State {
             for (int j = 0; j < this.m_boardSize; j++) {
                 if(newState.m_board[i][j] == Utils.bPawn){
                     newState.m_board[i][j] = Utils.bQueen;
-                    System.out.println("Black Pawn turned into a Black Queen!!");
+                    System.out.println("Black Pawn in position "+i+","+j+" turned into a Black Queen!!");
                 }
                 if(newState.m_board[i][j] == Utils.wPawn){
                     newState.m_board[i][j] = Utils.wQueen;
-                    System.out.println("White Pawn turned into a White Queen!!");
+                    System.out.println("White Pawn in position "+newState.m_board[i][j]+" turned into a White Queen!!");
                 }
             }
         }

@@ -13,7 +13,8 @@ import java.util.Scanner;
  */
 public class Human extends Player {
 
-    Scanner keyboard = new Scanner(System.in).useDelimiter("[,\\s+]");
+    //Scanner keyboard = new Scanner(System.in).useDelimiter("[,\\s+]");
+    Scanner keyboard = new Scanner(System.in);
     State ret;
     Action action;
     boolean invalidMovement;
@@ -29,21 +30,26 @@ public class Human extends Player {
     @Override
     public State Move(State st) {
         String input;
-        String[] buffer;
+        //String[] buffer;
         this.ret = null;
         this.action = new Action();
         this.invalidMovement = true;
+        
         while (this.invalidMovement) {
             System.out.println("Enter the position of the piece you want to move:");
             input = keyboard.nextLine();
-            buffer = input.split(",");
-            this.action.m_initPos.row = Integer.parseInt(buffer[0]);
-            this.action.m_initPos.col = Integer.parseInt(buffer[1]);
+            //buffer = input.split(",");
+            this.action.m_initPos.row = Character.getNumericValue(input.charAt(0));
+            this.action.m_initPos.col = Character.getNumericValue(input.charAt(2));
+            //this.action.m_initPos.row = Integer.parseInt(buffer[0]);
+            //this.action.m_initPos.col = Integer.parseInt(buffer[1]);
             System.out.println("Enter the destination position for the chosen piece:");
             input = keyboard.nextLine();
-            buffer = input.split(",");
-            this.action.m_finalPos.row = Integer.parseInt(buffer[0]);
-            this.action.m_finalPos.col = Integer.parseInt(buffer[1]);
+            //buffer = input.split(",");
+            this.action.m_finalPos.row = Character.getNumericValue(input.charAt(0));
+            this.action.m_finalPos.col = Character.getNumericValue(input.charAt(2));
+            //this.action.m_finalPos.row = Integer.parseInt(buffer[0]);
+            //this.action.m_finalPos.col = Integer.parseInt(buffer[1]);
 
             if (this.color == 1) {
                 //Check that the chosen piece corresponds to the color of the player
