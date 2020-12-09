@@ -15,7 +15,7 @@ public class ChessGame {
         String method = null;
         String initialTranslator;
         boolean initial = true;
-        int depth;
+        int depth = 0;
         String color = null;
         int remainingMoves = 0;
         double probability = 0.0;
@@ -53,23 +53,25 @@ public class ChessGame {
         } else {
             state = Utils.getChessInstancePosition(probability, seed);
         }
+        
+        state.remainingMoves = remainingMoves;
 
         switch (color) {
             case "white":
-                player1 = new Agent(color, false, method);
+                player1 = new Agent(color, false, method, depth);
                 player2 = new Human("black");
                 break;
             case "black":
                 player1 = new Human("white");
-                player2 = new Agent(color, false, method);
+                player2 = new Agent(color, false, method, depth);
                 break;
             case "both":
-                player1 = new Agent("white", false, method);
-                player2 = new Agent("black", false, method);
+                player1 = new Agent("white", false, method, depth);
+                player2 = new Agent("black", false, method, depth);
                 break;
             default:
-                player1 = new Agent("white", false, method);
-                player2 = new Agent("black", true, method);
+                player1 = new Agent("white", false, method, depth);
+                player2 = new Agent("black", true, method, depth);
                 break;
         }
 
@@ -79,32 +81,57 @@ public class ChessGame {
             switch (color) {
                 case "white":
                     System.out.println("Player 1 (AI) moves");
-                    //state = player1.Move(state);
-                    //state.isFinal();
+                    state = player1.Move(state);
+                    Utils.printBoard(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.exit(0);
+                    }                   
                     System.out.println("Player 2 (human), it's your turn");
                     state = player2.Move(state);
-                    //state.isFinal();
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 2 (human)***");
+                        System.exit(0);
+                    } 
                     break;
                 case "black":
                     System.out.println("Player 1 (human), it's your turn");
                     state = player1.Move(state);
-                    //state.isFinal();
+                    Utils.printBoard(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (human)***");
+                        System.exit(0);
+                    }
                     System.out.println("Player 2 (AI) moves");
-                    //state = player2.Move(state);
-                    //state.isFinal();
+                    state = player2.Move(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                        System.exit(0);
+                    }
                     break;
                 case "both":
                     System.out.println("Player 1 (AI) moves");
-                    //state = player1.Move(state);
-                    //state.isFinal();
+                    state = player1.Move(state);
+                    Utils.printBoard(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.exit(0);
+                    }
                     System.out.println("Player 2 (AI) moves");
-                    //state = player2.Move(state);
-                    //state.isFinal();
+                    state = player2.Move(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                        System.exit(0);
+                    }
                     break;
                 case "dummy":
                     System.out.println("Player 1 (AI) moves");
-                    //state = player1.Move(state);
-                    //state.isFinal();
+                    state = player1.Move(state);
+                    Utils.printBoard(state);
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.exit(0);
+                    }
                     System.out.println("Player 2 (dummy) does nothing");
                     break;
             }

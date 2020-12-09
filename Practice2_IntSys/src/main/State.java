@@ -1,29 +1,32 @@
 package main;
 
 // This class contains the information needed to represent a state 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-
-// and some useful methods
 public class State {
 
     int[][] m_board = null;
-    //Position[] whitePositions = null;
-    //Position[] blackPositions = null;
     int m_boardSize = 8;
+    int remainingMoves;
+    //This variable will be checked to determine if the game is finished
+    int nKings = 2;
 
     // constructor
     public State(int[][] board) {
         this.m_board = board;
     }
 
-    // compares if the current state is final, i.e. the agent is in the last row
-    /*public boolean isFinal(){
-            if (this.m_agentPos.row == this.m_boardSize-1) return true;
-            else return false;
-    }*/
-    
+    /**
+     * The final state will be reached when there are less than 2 kings or the
+     * maximum number of moves has been reached
+     *
+     * @return
+     */
+    public boolean isFinal() {
+        if (this.nKings < 2) {
+            return true;
+        }
+        return this.remainingMoves == 0;
+    }
+
     // hard copy of an State
     public State copy() {
         int[][] cBoard = new int[this.m_boardSize][this.m_boardSize];
@@ -43,36 +46,27 @@ public class State {
         State newState = this.copy();
         aux = newState.m_board[action.m_initPos.row][action.m_initPos.col];
         newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty;
+        //If the piece at the final position is a king, the king's counter is decreased in order to trigger the return true at isFinal
+        if ((newState.m_board[action.m_finalPos.row][action.m_finalPos.col] == Utils.bKing) || (newState.m_board[action.m_finalPos.row][action.m_finalPos.col] == Utils.wKing)) {
+            newState.nKings--;
+        }
         newState.m_board[action.m_finalPos.row][action.m_finalPos.col] = aux;
-
-        return newState;
-    }
-    
-    public boolean isFinal() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    
-    
-
-    /*@Override
-    public boolean equals(Object obj){
-        State st = (State) obj;
-        boolean eq=false;
-
-        if(st.m_agentPos.col == this.m_agentPos.col){
-            if(st.m_agentPos.row == this.m_agentPos.row){
-                eq=true;
+        newState.remainingMoves--;
+        //The last rows of the board will be checked to see if a pawn has arrived there, in order to turn it into a queen
+        for (int i = 0; i < this.m_boardSize; i = i + this.m_boardSize - 1) {
+            for (int j = 0; j < this.m_boardSize; j++) {
+                if(newState.m_board[i][j] == Utils.bPawn){
+                    newState.m_board[i][j] = Utils.bQueen;
+                    System.out.println("Black Pawn turned into a Black Queen!!");
+                }
+                if(newState.m_board[i][j] == Utils.wPawn){
+                    newState.m_board[i][j] = Utils.wQueen;
+                    System.out.println("White Pawn turned into a White Queen!!");
+                }
             }
         }
 
-        return eq;
+        return newState;
     }
 
-    @Override
-    public int hashCode() {
-        return this.m_agentPos.col+this.m_agentPos.row;
-    }*/
-
-    
 }

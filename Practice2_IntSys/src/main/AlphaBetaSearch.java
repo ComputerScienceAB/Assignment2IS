@@ -11,10 +11,10 @@ package main;
  */
 public class AlphaBetaSearch extends MiniMaxSearch {
     
-     int alpha, beta;
+    int alpha, beta;
     
-    public AlphaBetaSearch(int c){
-        super(c);
+    public AlphaBetaSearch(int c, int d){
+        super(c,d);
     }
     
     public Action AlphaBeta(State state){
@@ -43,7 +43,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return getUtility(state);
+        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.max(Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.max(alpha, beta));
@@ -71,13 +71,14 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                 }           
             }
         }
-        if (state.isFinal()) return getUtility(state);
+        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.min(Math.min(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
             if (best <= beta) return best;
             alpha = Math.min(alpha, best);
-        }   
+        }
+        this.searchDepth--;
         return best;
     }
     

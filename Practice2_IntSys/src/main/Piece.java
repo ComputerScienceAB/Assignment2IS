@@ -206,7 +206,7 @@ public class Piece {
                 } 
             }            
         }else{
-            list = new ArrayList<Action>(10);
+            list = new ArrayList<Action>();
             for(int c=c0-1, r=r0-1; (c>=0) && (r>=0) && !busyCell; c--, r--){
                 if(state.m_board[r][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r,c));
@@ -247,7 +247,7 @@ public class Piece {
                 } 
             }            
         }else{
-           list = new ArrayList<Action>(10);
+           list = new ArrayList<Action>();
             for(int c=c0-1, r=r0+1; (c>=0) && (r<state.m_boardSize) && !busyCell; c--, r++){
                 if(state.m_board[r][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r,c));
@@ -288,7 +288,7 @@ public class Piece {
                 } 
             }            
         }else{
-           list = new ArrayList<Action>(10);
+           list = new ArrayList<Action>();
             for(int c=c0+1, r=r0-1; (c<state.m_boardSize) && (r>=0) && !busyCell; c++, r--){
                 if(state.m_board[r][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r,c));
@@ -329,7 +329,7 @@ public class Piece {
                 } 
             }           
         }else{
-           list = new ArrayList<Action>(10);
+           list = new ArrayList<Action>();
             for(int c=c0+1, r=r0+1; (c<state.m_boardSize) && (r<state.m_boardSize) && !busyCell; c++, r++){
                 if(state.m_board[r][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r,c));
