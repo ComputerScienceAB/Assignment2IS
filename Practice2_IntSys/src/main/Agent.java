@@ -42,13 +42,18 @@ public class Agent extends Player{
     @Override
     public State Move(State st){
         State ret;
+        Action action;
         if(this.searchStrategy.equals("minimax")){
-            ret = st.applyAction(this.mmSearchEngine.Minimax(st));
+            action = this.mmSearchEngine.Minimax(st);
+            ret = st.applyAction(action);            
             this.mmSearchEngine.searchDepth = this.searchDepth;
         }else{
-            ret = st.applyAction(this.abSearchEngine.AlphaBeta(st));
+            action = this.abSearchEngine.AlphaBeta(st);
+            ret = st.applyAction(action);
             this.abSearchEngine.searchDepth = this.searchDepth;
         }
+        
+        this.score = action.value;
         
         return ret;
     }

@@ -32,9 +32,33 @@ public class MiniMaxSearch {
     }
     
     public Action Minimax(State state){
+        ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
+        this.searchDepth--;
         best = MaxValue(state);
+        for(int i=0; i<state.m_boardSize;i++){
+            for(int j=0;j<state.m_boardSize;j++){
+                if(this.agentColor == 0){
+                    if((state.m_board[i][j] >= Utils.wPawn) && (state.m_board[i][j] <= Utils.wKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        piecePossibleActions = this.mPiece.getPossibleActions(state);
+                        if(piecePossibleActions != null){
+                           totalPossibleActions.addAll(this.mPiece.getPossibleActions(state)); 
+                        }                      
+                    }
+                }else{
+                    if((state.m_board[i][j] >= Utils.bPawn) && (state.m_board[i][j] <= Utils.bKing)){
+                        this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
+                        piecePossibleActions = this.mPiece.getPossibleActions(state);
+                        if(piecePossibleActions != null){
+                           totalPossibleActions.addAll(this.mPiece.getPossibleActions(state)); 
+                        } 
+                    }
+                }           
+            }
+        }
         for (int i = 0; i< totalPossibleActions.size(); i++){
+            
             if (totalPossibleActions.get(i).value == best) return totalPossibleActions.get(i);
         }
         return null;
@@ -56,7 +80,10 @@ public class MiniMaxSearch {
                 }else{
                     if((state.m_board[i][j] >= Utils.bPawn) && (state.m_board[i][j] <= Utils.bKing)){
                         this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
-                        totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                        piecePossibleActions = this.mPiece.getPossibleActions(state);
+                        if(piecePossibleActions != null){
+                           totalPossibleActions.addAll(this.mPiece.getPossibleActions(state)); 
+                        } 
                     }
                 }           
             }
@@ -86,7 +113,10 @@ public class MiniMaxSearch {
                 }else{
                     if((state.m_board[i][j] >= Utils.wPawn) && (state.m_board[i][j] <= Utils.wKing)){
                         this.mPiece = Utils.getPiece(state.m_board[i][j], new Position(i,j));
-                        totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
+                        piecePossibleActions = this.mPiece.getPossibleActions(state);
+                        if(piecePossibleActions != null){
+                           totalPossibleActions.addAll(this.mPiece.getPossibleActions(state)); 
+                        } 
                     }
                 }           
             }

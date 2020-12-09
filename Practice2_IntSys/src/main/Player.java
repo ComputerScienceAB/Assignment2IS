@@ -13,6 +13,7 @@ public class Player {
     
     //0 = White; 1 = Black
     int color;
+    int score = 0;
     
     public State Move(State st){
         return null;  //Never arrive here

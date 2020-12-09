@@ -111,7 +111,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if(c0-1>=0){
                if(state.m_board[r0][c0-1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0,c0-1));
@@ -124,7 +124,7 @@ public class Piece {
                 }  
             }            
         }else{
-            list = new ArrayList<Action>(10);
+            list = new ArrayList<Action>();
             for(int c=c0-1; (c>=0) && !busyCell; c--){
                 if(state.m_board[r0][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0,c));
@@ -152,7 +152,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if(c0+1<state.m_boardSize){
                 if(state.m_board[r0][c0+1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0,c0+1));
@@ -165,7 +165,7 @@ public class Piece {
                 } 
             }            
         }else{
-           list = new ArrayList<Action>(10);
+           list = new ArrayList<Action>();
             for(int c=c0+1; (c<state.m_boardSize) && !busyCell; c++){
                 if(state.m_board[r0][c] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0,c));
@@ -193,7 +193,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if((r0-1>=0) && (c0-1>=0)){
                if(state.m_board[r0-1][c0-1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0-1,c0-1));
@@ -234,7 +234,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if((r0+1<state.m_boardSize) && (c0-1>=0)){
                 if(state.m_board[r0+1][c0-1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0+1,c0-1));
@@ -275,7 +275,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if((r0-1>=0) && (c0+1<state.m_boardSize)){
                 if(state.m_board[r0-1][c0+1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0-1,c0+1));
@@ -316,7 +316,7 @@ public class Piece {
         Boolean busyCell = false;
         
         if(king){
-            list = new ArrayList<Action>(1);
+            list = new ArrayList<Action>();
             if((r0+1<state.m_boardSize) && (c0+1<state.m_boardSize)){
                 if(state.m_board[r0+1][c0+1] == Utils.empty){
                     action = new Action(this.piecePosition,new Position(r0+1,c0+1));

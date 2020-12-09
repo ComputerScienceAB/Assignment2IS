@@ -21,7 +21,7 @@ public class Knight extends Piece {
         int r0 = this.piecePosition.row;
         int c0 = this.piecePosition.col;
 
-        ArrayList<Action> list = new ArrayList<Action>(8);
+        ArrayList<Action> list = new ArrayList<Action>();
         Action action = null;
         Position origin = this.piecePosition;
         
