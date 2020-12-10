@@ -22,7 +22,6 @@ public class AlphaBetaSearch extends MiniMaxSearch {
     public Action AlphaBeta(State state){
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
-        this.searchDepth--;
         best = MaxValue(state, posInf, negInf);
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
@@ -56,6 +55,8 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         this.alpha = alpha;
         this.beta = beta;
+        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
+        this.searchDepth--;
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -76,8 +77,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                     }
                 }           
             }
-        }
-        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
+        }        
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.max(Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.max(alpha, beta));
@@ -92,6 +92,8 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         this.alpha = alpha;
         this.beta = beta;
+        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
+        this.searchDepth--;
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -112,15 +114,13 @@ public class AlphaBetaSearch extends MiniMaxSearch {
                     }
                 }           
             }
-        }
-        if (state.isFinal() || this.searchDepth == 0) return getUtility(state);
+        }        
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
             best = Math.min(Math.min(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
             if (best <= beta) return best;
             alpha = Math.min(alpha, best);
         }
-        this.searchDepth--;
         return best;
     }
     
