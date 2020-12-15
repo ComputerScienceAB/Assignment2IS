@@ -183,7 +183,7 @@ public class MiniMaxSearch {
                 }
             }
         }
-        return blackscore - whitescore;
+        return blackscore-whitescore;
     }
 
 }
