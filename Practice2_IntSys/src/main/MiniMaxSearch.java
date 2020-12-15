@@ -6,6 +6,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -27,9 +28,10 @@ public class MiniMaxSearch {
     }
 
     public Action Minimax(State state) {
-        int i;
+        int i, rnd;
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
+        ArrayList<Action> bestPossibleActions = new ArrayList<>();
         best = MaxValue(state);
         for (i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
@@ -58,12 +60,15 @@ public class MiniMaxSearch {
         }
         
         for (i = 0; i < totalPossibleActions.size(); i++) {
-
             if (totalPossibleActions.get(i).value == best) {
-                return totalPossibleActions.get(i);
+                bestPossibleActions.add(totalPossibleActions.get(i));
             }
         }
-        return null;
+        
+        rnd = new Random().nextInt(bestPossibleActions.size());
+        
+        return bestPossibleActions.get(rnd);
+        
     }
 
     public int MaxValue(State state) {
