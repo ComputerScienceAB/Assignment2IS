@@ -16,7 +16,7 @@ public class MiniMaxSearch {
     final int posInf = Integer.MAX_VALUE;
     final int negInf = Integer.MIN_VALUE;
 
-    int best;
+    int best=-44;
     int agentColor;
     Piece mPiece;
     int searchDepth;
@@ -27,10 +27,11 @@ public class MiniMaxSearch {
     }
 
     public Action Minimax(State state) {
+        int i;
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
         best = MaxValue(state);
-        for (int i = 0; i < state.m_boardSize; i++) {
+        for (i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
                     if ((state.m_board[i][j] >= Utils.wPawn) && (state.m_board[i][j] <= Utils.wKing)) {
@@ -51,7 +52,12 @@ public class MiniMaxSearch {
                 }
             }
         }
-        for (int i = 0; i < totalPossibleActions.size(); i++) {
+        
+        for(i = 0; i< totalPossibleActions.size();i++){
+            totalPossibleActions.get(i).value = MaxValue(state.applyAction(totalPossibleActions.get(i)));
+        }
+        
+        for (i = 0; i < totalPossibleActions.size(); i++) {
 
             if (totalPossibleActions.get(i).value == best) {
                 return totalPossibleActions.get(i);
@@ -183,7 +189,12 @@ public class MiniMaxSearch {
                 }
             }
         }
-        return blackscore-whitescore;
+        if(this.agentColor == 0){
+            return whitescore-blackscore;
+        }else{
+            return blackscore-whitescore;
+        }
+        
     }
 
 }
