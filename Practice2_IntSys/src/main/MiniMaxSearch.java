@@ -56,7 +56,7 @@ public class MiniMaxSearch {
         }
         
         for(i = 0; i< totalPossibleActions.size();i++){
-            totalPossibleActions.get(i).value = MaxValue(state.applyAction(totalPossibleActions.get(i)));
+            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)));
         }
         
         for (i = 0; i < totalPossibleActions.size(); i++) {
@@ -65,9 +65,13 @@ public class MiniMaxSearch {
             }
         }
         
-        rnd = new Random().nextInt(bestPossibleActions.size());
+        if(!bestPossibleActions.isEmpty()){
+            rnd = new Random().nextInt(bestPossibleActions.size());
+            return bestPossibleActions.get(rnd);
+        }
         
-        return bestPossibleActions.get(rnd);
+        
+        return null;
         
     }
 

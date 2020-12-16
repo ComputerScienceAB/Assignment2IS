@@ -86,9 +86,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                                System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (human)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (human) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
@@ -103,9 +103,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                                System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (human)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (human) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
@@ -123,9 +123,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (human)***");                                
+                                System.out.println("***End of the game, the winner is: Player 1 (human) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (Black AI) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
@@ -140,9 +140,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (human)***");                                
+                                System.out.println("***End of the game, the winner is: Player 1 (human) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (Black AI) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
@@ -160,9 +160,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (White AI)***");                                
+                                System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (Black AI) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
@@ -177,9 +177,9 @@ public class ChessGame {
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             if(player1.score > player2.score){
-                                System.out.println("***End of the game, the winner is: Player 1 (White AI)***");                                
+                                System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
-                                System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
+                                System.out.println("***End of the game, the winner is: Player 2 (Black AI) with "+player2.score+" points***");
                             }else{
                                 System.out.println("***Draw, no winner***");
                             }
