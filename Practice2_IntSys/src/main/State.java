@@ -13,6 +13,11 @@ public class State {
     public State(int[][] board) {
         this.m_board = board;
     }
+    
+    public State(int[][] board, int rm) {
+        this.m_board = board;
+        this.remainingMoves = rm;
+    }
 
     /**
      * The final state will be reached when there are less than 2 kings or the
@@ -37,7 +42,7 @@ public class State {
             }
         }
 
-        return new State(cBoard);
+        return new State(cBoard,this.remainingMoves);
     }
 
     // apply a given action over the current state -which remains unmodified. Return a new state
