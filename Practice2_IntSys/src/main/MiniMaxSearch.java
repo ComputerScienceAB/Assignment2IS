@@ -56,7 +56,7 @@ public class MiniMaxSearch {
         }
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
-            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)));
+            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth);
         }
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
@@ -80,13 +80,12 @@ public class MiniMaxSearch {
 
     }
 
-    public int MaxValue(State state) {
+    public int MaxValue(State state, int depthLimit) {
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
-        if (state.isFinal() || this.searchDepth == 0) {
+        if (state.isFinal() || depthLimit == 0) {
             return Utils.getUtility(state, this.agentColor);
         }
-        this.searchDepth--;
         for (int i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -111,19 +110,18 @@ public class MiniMaxSearch {
 
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
-            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i))));
+            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
 
         return best;
     }
 
-    public int MinValue(State state) {
+    public int MinValue(State state, int depthLimit) {
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
-        if (state.isFinal() || this.searchDepth == 0) {
+        if (state.isFinal() || depthLimit == 0) {
             return Utils.getUtility(state, this.agentColor);
         }
-        this.searchDepth--;
         for (int i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -148,7 +146,7 @@ public class MiniMaxSearch {
 
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
-            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i))));
+            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
 
         return best;
