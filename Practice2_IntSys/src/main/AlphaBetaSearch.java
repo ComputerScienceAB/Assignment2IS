@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class AlphaBetaSearch extends MiniMaxSearch {
+public class AlphaBetaSearch extends Algorithm {
     
     int alpha, beta;
     
@@ -117,7 +117,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         }        
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
-            best = Math.min(Math.min(best, MinValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
+            best = Math.min(Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)))), Math.min(alpha, beta));
             if (best <= beta) return best;
             alpha = Math.min(alpha, best);
         }
