@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Usuario
  */
-public class AlphaBetaSearch extends MiniMaxSearch {
+public class AlphaBetaSearch extends Algorithm {
     
     int alpha, beta;
     
@@ -25,7 +25,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         ArrayList<Action> bestPossibleActions = new ArrayList<Action>();
-        best = MaxValue(state, negInf, posInf, this.searchDepth);
+        best = this.negInf;
         for(i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -67,11 +67,11 @@ public class AlphaBetaSearch extends MiniMaxSearch {
             return bestPossibleActions.get(rnd);
         }
 
-        for (i = 0; i< totalPossibleActions.size(); i++){
+        /*for (i = 0; i< totalPossibleActions.size(); i++){
             totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
             if (totalPossibleActions.get(i).value == best) return totalPossibleActions.get(i);
             
-        }
+        }*/
         
         return null;
         
@@ -83,8 +83,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         this.alpha = alpha;
         this.beta = beta;
-        if (state.isFinal() || this.searchDepth == 0) return Utils.getUtility(state,this.agentColor);
-        this.searchDepth--;
+        if (state.isFinal() || depthLimit == 0) return Utils.getUtility(state,this.agentColor);
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -108,7 +107,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         }        
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
-            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth));
+            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best >= beta) return best;
             alpha = Math.max(alpha, best);
         }   
@@ -120,8 +119,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         this.alpha = alpha;
         this.beta = beta;
-        if (state.isFinal() || this.searchDepth == 0) return Utils.getUtility(state,this.agentColor);
-        this.searchDepth--;
+        if (state.isFinal() || depthLimit == 0) return Utils.getUtility(state,this.agentColor);
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -145,7 +143,7 @@ public class AlphaBetaSearch extends MiniMaxSearch {
         }        
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
-            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth));
+            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best <= alpha) return best;
             beta = Math.min(beta, best);
         }
