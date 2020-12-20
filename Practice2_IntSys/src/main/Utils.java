@@ -241,6 +241,68 @@ public class Utils {
         State state = new State(board);
         return state;
     }
+    
+    /**
+     * This is the method used to get the utility of an state
+     * @param state
+     * @param agentColor
+     * @return 
+     */
+    public static int getUtility(State state, int agentColor) {
+        int whitescore = 0;
+        int blackscore = 0;
+        for (int i = 0; i < state.m_boardSize; i++) {
+            for (int j = 0; j < state.m_boardSize; j++) {
+                if (state.m_board[i][j] != Utils.empty) {
+                    if (state.m_board[i][j] >= Utils.wPawn && state.m_board[i][j] <= Utils.wKing) { //if the piece in that position is white
+                        if (state.m_board[i][j] == Utils.wPawn) {
+                            whitescore += 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wRook) {
+                            whitescore += 500;
+                        }
+                        if (state.m_board[i][j] == Utils.wBishop) {
+                            whitescore += 330;
+                        }
+                        if (state.m_board[i][j] == Utils.wKnight) {
+                            whitescore += 320;
+                        }
+                        if (state.m_board[i][j] == Utils.wQueen) {
+                            whitescore += 900;
+                        }
+                        if (state.m_board[i][j] == Utils.wKing) {
+                            whitescore += 20000;
+                        }
+                    } else { //if piece is black
+                        if (state.m_board[i][j] == Utils.bPawn) {
+                            blackscore += 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bRook) {
+                            blackscore += 500;
+                        }
+                        if (state.m_board[i][j] == Utils.bBishop) {
+                            blackscore += 330;
+                        }
+                        if (state.m_board[i][j] == Utils.bKnight) {
+                            blackscore += 320;
+                        }
+                        if (state.m_board[i][j] == Utils.bQueen) {
+                            blackscore += 900;
+                        }
+                        if (state.m_board[i][j] == Utils.bKing) {
+                            blackscore += 20000;
+                        }
+                    }
+                }
+            }
+        }
+        if(agentColor == 0){
+            return whitescore-blackscore;
+        }else{
+            return blackscore-whitescore;
+        }
+        
+    }
 
 } // end of class
 

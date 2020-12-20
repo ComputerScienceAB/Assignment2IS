@@ -17,7 +17,7 @@ public class MiniMaxSearch {
     final int posInf = Integer.MAX_VALUE;
     final int negInf = Integer.MIN_VALUE;
 
-    int best=-44;
+    int best = -44;
     int agentColor;
     Piece mPiece;
     int searchDepth;
@@ -28,11 +28,11 @@ public class MiniMaxSearch {
     }
 
     public Action Minimax(State state) {
-        int i, rnd;
+        int i, rnd, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
         ArrayList<Action> bestPossibleActions = new ArrayList<>();
-        best = MaxValue(state);
+        best = negInf;
         for (i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -54,30 +54,39 @@ public class MiniMaxSearch {
                 }
             }
         }
-        
-        for(i = 0; i< totalPossibleActions.size();i++){
-            totalPossibleActions.get(i).value = MaxValue(state.applyAction(totalPossibleActions.get(i)));
-        }
-        
+
         for (i = 0; i < totalPossibleActions.size(); i++) {
-            if (totalPossibleActions.get(i).value == best) {
+            
+            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth);
+        }
+
+        for (i = 0; i < totalPossibleActions.size(); i++) {
+            buffer = totalPossibleActions.get(i).value;
+            if (buffer >= best) {
+                best = buffer;
                 bestPossibleActions.add(totalPossibleActions.get(i));
             }
         }
-        
-        rnd = new Random().nextInt(bestPossibleActions.size());
-        
-        return bestPossibleActions.get(rnd);
-        
+
+        while (bestPossibleActions.get(0).value < best) {
+            bestPossibleActions.remove(0);
+        }
+
+        if (!bestPossibleActions.isEmpty()) {
+            rnd = new Random().nextInt(bestPossibleActions.size());
+            return bestPossibleActions.get(rnd);
+        }
+
+        return null;
+
     }
 
-    public int MaxValue(State state) {
+    public int MaxValue(State state, int depthLimit) {
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
-        ArrayList<Action> totalPossibleActions = new ArrayList<>();       
-        if (state.isFinal() || this.searchDepth == 0) {
-            return getUtility(state);
+        ArrayList<Action> totalPossibleActions = new ArrayList<>();
+        if (state.isFinal() || depthLimit == 0) {
+            return Utils.getUtility(state, this.agentColor);
         }
-        this.searchDepth--;
         for (int i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -102,19 +111,18 @@ public class MiniMaxSearch {
 
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
-            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i))));
+            best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
-        
+
         return best;
     }
 
-    public int MinValue(State state) {
+    public int MinValue(State state, int depthLimit) {
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
-        ArrayList<Action> totalPossibleActions = new ArrayList<>();        
-        if (state.isFinal() || this.searchDepth == 0) {
-            return getUtility(state);
+        ArrayList<Action> totalPossibleActions = new ArrayList<>();
+        if (state.isFinal() || depthLimit == 0) {
+            return Utils.getUtility(state, this.agentColor);
         }
-        this.searchDepth--;
         for (int i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -139,67 +147,10 @@ public class MiniMaxSearch {
 
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
-            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i))));
+            best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
-        
+
         return best;
-    }
-
-
-    public int getUtility(State state) {
-        int whitescore = 0;
-        int blackscore = 0;
-        for (int i = 0; i < state.m_boardSize; i++) {
-            for (int j = 0; j < state.m_boardSize; j++) {
-                if (state.m_board[i][j] != Utils.empty) {
-                    if (state.m_board[i][j] >= Utils.wPawn && state.m_board[i][j] <= Utils.wKing) { //if the piece in that position is white
-                        if (state.m_board[i][j] == Utils.wPawn) {
-                            whitescore += 100;
-                        }
-                        if (state.m_board[i][j] == Utils.wRook) {
-                            whitescore += 500;
-                        }
-                        if (state.m_board[i][j] == Utils.wBishop) {
-                            whitescore += 330;
-                        }
-                        if (state.m_board[i][j] == Utils.wKnight) {
-                            whitescore += 320;
-                        }
-                        if (state.m_board[i][j] == Utils.wQueen) {
-                            whitescore += 900;
-                        }
-                        if (state.m_board[i][j] == Utils.wKing) {
-                            whitescore += 20000;
-                        }
-                    } else { //if piece is black
-                        if (state.m_board[i][j] == Utils.bPawn) {
-                            blackscore += 100;
-                        }
-                        if (state.m_board[i][j] == Utils.bRook) {
-                            blackscore += 500;
-                        }
-                        if (state.m_board[i][j] == Utils.bBishop) {
-                            blackscore += 330;
-                        }
-                        if (state.m_board[i][j] == Utils.bKnight) {
-                            blackscore += 320;
-                        }
-                        if (state.m_board[i][j] == Utils.bQueen) {
-                            blackscore += 900;
-                        }
-                        if (state.m_board[i][j] == Utils.bKing) {
-                            blackscore += 20000;
-                        }
-                    }
-                }
-            }
-        }
-        if(this.agentColor == 0){
-            return whitescore-blackscore;
-        }else{
-            return blackscore-whitescore;
-        }
-        
     }
 
 }

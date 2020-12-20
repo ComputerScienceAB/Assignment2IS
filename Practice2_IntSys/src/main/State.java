@@ -13,6 +13,11 @@ public class State {
     public State(int[][] board) {
         this.m_board = board;
     }
+    
+    public State(int[][] board, int rm) {
+        this.m_board = board;
+        this.remainingMoves = rm;
+    }
 
     /**
      * The final state will be reached when there are less than 2 kings or the
@@ -37,14 +42,16 @@ public class State {
             }
         }
 
-        return new State(cBoard);
+        return new State(cBoard,this.remainingMoves);
     }
 
     // apply a given action over the current state -which remains unmodified. Return a new state
     public State applyAction(Action action) {
         int aux;
         State newState = this.copy();
-        aux = newState.m_board[action.m_initPos.row][action.m_initPos.col];
+        
+        if (action != null){
+           aux = newState.m_board[action.m_initPos.row][action.m_initPos.col];
         newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty;
         //If the piece at the final position is a king, the king's counter is decreased in order to trigger the return true at isFinal
         if ((newState.m_board[action.m_finalPos.row][action.m_finalPos.col] == Utils.bKing) || (newState.m_board[action.m_finalPos.row][action.m_finalPos.col] == Utils.wKing)) {
@@ -64,8 +71,9 @@ public class State {
                     //System.out.println("White Pawn in position "+newState.m_board[i][j]+" turned into a White Queen!!");
                 }
             }
+        } 
         }
-
+        
         return newState;
     }
 
