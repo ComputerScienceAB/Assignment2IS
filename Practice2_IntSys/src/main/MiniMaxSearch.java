@@ -20,11 +20,11 @@ public class MiniMaxSearch extends Algorithm{
     }
 
     public Action Minimax(State state) {
-        int i, rnd, buffer = 0;
+        int i, rnd, v, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
         ArrayList<Action> totalPossibleActions = new ArrayList<>();
         ArrayList<Action> bestPossibleActions = new ArrayList<>();
-        best = negInf;
+        v = negInf;
         for (i = 0; i < state.m_boardSize; i++) {
             for (int j = 0; j < state.m_boardSize; j++) {
                 if (this.agentColor == 0) {
@@ -53,13 +53,13 @@ public class MiniMaxSearch extends Algorithm{
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
             buffer = totalPossibleActions.get(i).value;
-            if (buffer >= best) {
-                best = buffer;
+            if (buffer >= v) {
+                v = buffer;
                 bestPossibleActions.add(totalPossibleActions.get(i));
             }
         }
 
-        while (bestPossibleActions.get(0).value < best) {
+        while (bestPossibleActions.get(0).value < v) {
             bestPossibleActions.remove(0);
         }
 
