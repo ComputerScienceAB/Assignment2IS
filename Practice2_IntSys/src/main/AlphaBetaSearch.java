@@ -21,11 +21,11 @@ public class AlphaBetaSearch extends Algorithm {
     }
     
     public Action AlphaBeta(State state){
-        int i, rnd, buffer = 0;
+        int i, rnd, v, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
         ArrayList<Action> bestPossibleActions = new ArrayList<Action>();
-        best = this.negInf;
+        v = this.negInf;
         for(i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -52,13 +52,13 @@ public class AlphaBetaSearch extends Algorithm {
         for (i = 0; i < totalPossibleActions.size(); i++) {
             totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
             buffer = totalPossibleActions.get(i).value;
-            if (buffer >= best) {
-                best = buffer;
+            if (buffer >= v) {
+                v = buffer;
                 bestPossibleActions.add(totalPossibleActions.get(i));
             }
         }
 
-        while (bestPossibleActions.get(0).value < best) {
+        while (bestPossibleActions.get(0).value < v) {
             bestPossibleActions.remove(0);
         }
 
