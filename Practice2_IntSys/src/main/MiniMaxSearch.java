@@ -56,7 +56,6 @@ public class MiniMaxSearch {
         }
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
-            
             totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth);
         }
 
