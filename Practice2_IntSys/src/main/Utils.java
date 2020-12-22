@@ -271,7 +271,7 @@ public class Utils {
                             whitescore += 900;
                         }
                         if (state.m_board[i][j] == Utils.wKing) {
-                            whitescore += 20000;
+                            whitescore += 10000000;
                         }
                     } else { //if piece is black
                         if (state.m_board[i][j] == Utils.bPawn) {
@@ -290,7 +290,7 @@ public class Utils {
                             blackscore += 900;
                         }
                         if (state.m_board[i][j] == Utils.bKing) {
-                            blackscore += 20000;
+                            blackscore += 10000000;
                         }
                     }
                 }
