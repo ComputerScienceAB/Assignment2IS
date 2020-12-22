@@ -14,7 +14,8 @@ import java.util.Random;
  */
 public class AlphaBetaSearch extends Algorithm {
     
-    int alpha, beta;
+    int alpha = Integer.MIN_VALUE;
+   int beta = Integer.MAX_VALUE;
     
     public AlphaBetaSearch(int c, int d){
         super(c,d);
