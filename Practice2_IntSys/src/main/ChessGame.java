@@ -94,8 +94,9 @@ public class ChessGame {
                                 System.out.println("***Draw, no winner***");
                             }
                         }else{
-                            System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                            System.out.println("***End of the game, the winner is: Player 1 (White AI)***");                            
                         }
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
                         System.exit(0);
                     }                   
@@ -115,6 +116,7 @@ public class ChessGame {
                         }else{
                             System.out.println("***End of the game, the winner is: Player 2 (human)***");
                         }      
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
                         System.exit(0);
                     }
@@ -137,6 +139,7 @@ public class ChessGame {
                         }else{
                             System.out.println("***End of the game, the winner is: Player 1 (human)***");
                         }     
+                        System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         Utils.printBoard(state);
                         System.exit(0);
                     }
@@ -156,6 +159,7 @@ public class ChessGame {
                         }else{
                             System.out.println("***End of the game, the winner is: Player 2 (Black AI)***");
                         }     
+                        System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         Utils.printBoard(state);
                         System.exit(0);
                     }
@@ -178,6 +182,9 @@ public class ChessGame {
                         }else{
                             System.out.println("***End of the game, the winner is: Player 1 (White AI)***"); 
                         }    
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
+                        System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
+                        System.out.println("Total generated states: "+(player1.searchEngine.generatedStates + player2.searchEngine.generatedStates));
                         Utils.printBoard(state);
                         System.exit(0);
                     }
@@ -197,6 +204,9 @@ public class ChessGame {
                         }else{
                             System.out.println("***End of the game, the winner is: Player 2 (Black AI)***"); 
                         }   
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
+                        System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
+                        System.out.println("Total generated states: "+(player1.searchEngine.generatedStates + player2.searchEngine.generatedStates));
                         Utils.printBoard(state);
                         System.exit(0);
                     }
@@ -207,6 +217,7 @@ public class ChessGame {
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
                         System.exit(0);
                     }
