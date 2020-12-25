@@ -14,9 +14,7 @@ import java.util.ArrayList;
 public class Agent extends Player{
 
     boolean dummy;
-    String searchStrategy;
-    MiniMaxSearch mmSearchEngine;
-    AlphaBetaSearch abSearchEngine;
+    String searchStrategy;    
     int searchDepth;
     
     
@@ -31,9 +29,9 @@ public class Agent extends Player{
         this.searchStrategy = ss;
         this.searchDepth = depth;
         if(ss.equals("minimax")){
-            this.mmSearchEngine = new MiniMaxSearch(this.color, this.searchDepth);
+            this.searchEngine = new MiniMaxSearch(this.color, this.searchDepth);
         }else{
-            this.abSearchEngine = new AlphaBetaSearch(this.color, this.searchDepth);
+            this.searchEngine = new AlphaBetaSearch(this.color, this.searchDepth);
         }
         
     }
@@ -44,16 +42,16 @@ public class Agent extends Player{
         State ret;
         Action action;
         if(this.searchStrategy.equals("minimax")){
-            action = this.mmSearchEngine.Minimax(st);
+            action = this.searchEngine.Minimax(st);
             ret = st.applyAction(action);            
-            this.mmSearchEngine.searchDepth = this.searchDepth;
+            //this.searchEngine.searchDepth = this.searchDepth;
         }else{
-            action = this.abSearchEngine.AlphaBeta(st);
+            action = this.searchEngine.AlphaBeta(st);
             ret = st.applyAction(action);
-            this.abSearchEngine.searchDepth = this.searchDepth;
+            //this.searchEngine.searchDepth = this.searchDepth;
         }
         
-        this.score += action.value;
+        //this.score += action.value;
         
         return ret;
     }

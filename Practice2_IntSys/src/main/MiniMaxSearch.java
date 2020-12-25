@@ -19,6 +19,7 @@ public class MiniMaxSearch extends Algorithm{
         super(c,d);
     }
 
+    @Override
     public Action Minimax(State state) {
         int i, rnd, v, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<>();
@@ -48,6 +49,7 @@ public class MiniMaxSearch extends Algorithm{
         }
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
+            this.generatedStates++;
             totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth);
         }
 
@@ -102,6 +104,7 @@ public class MiniMaxSearch extends Algorithm{
 
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
+            this.generatedStates++;
             best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
 
@@ -138,6 +141,7 @@ public class MiniMaxSearch extends Algorithm{
 
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++) {
+            this.generatedStates++;
             best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), (depthLimit - 1)));
         }
 

@@ -14,6 +14,8 @@ public class Player {
     //0 = White; 1 = Black
     int color;
     int score = 0;
+    //Only used by Agents, we declare it here in order to be able to access it from ChessGame
+    Algorithm searchEngine;
     
     public State Move(State st){
         return null;  //Never arrive here

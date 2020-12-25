@@ -17,10 +17,19 @@ public class Algorithm {
     int agentColor;
     Piece mPiece;
     int searchDepth;
+    int generatedStates = 0;
     
     public Algorithm(int c, int d) {
         this.agentColor = c;
         this.searchDepth = d;
+    }
+    
+    public Action Minimax(State state){
+        return null; //Never arrive here
+    }
+    
+    public Action AlphaBeta(State state){
+        return null; //Never arrive here
     }
     
 }

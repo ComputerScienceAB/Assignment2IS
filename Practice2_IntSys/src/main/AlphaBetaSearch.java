@@ -21,6 +21,7 @@ public class AlphaBetaSearch extends Algorithm {
         super(c,d);
     }
     
+    @Override
     public Action AlphaBeta(State state){
         int i, rnd, v, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
@@ -51,6 +52,7 @@ public class AlphaBetaSearch extends Algorithm {
       
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
+            this.generatedStates++;
             totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
             buffer = totalPossibleActions.get(i).value;
             if (buffer >= v) {
@@ -68,9 +70,7 @@ public class AlphaBetaSearch extends Algorithm {
             return bestPossibleActions.get(rnd);
         }
         
-        return null;
-        
-        
+        return null;       
     } 
     
     public int MaxValue(State state, int alpha, int beta, int depthLimit){
@@ -102,6 +102,7 @@ public class AlphaBetaSearch extends Algorithm {
         }        
         best = negInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
+            this.generatedStates++;
             best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best >= beta) return best;
             this.alpha = Math.max(alpha, best);
@@ -138,6 +139,7 @@ public class AlphaBetaSearch extends Algorithm {
         }        
         best = posInf;
         for (int i = 0; i < totalPossibleActions.size(); i++){
+            this.generatedStates++;
             best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best <= alpha) return best;
             this.beta = Math.min(beta, best);
