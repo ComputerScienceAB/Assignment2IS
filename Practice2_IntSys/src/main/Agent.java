@@ -53,7 +53,7 @@ public class Agent extends Player{
             this.abSearchEngine.searchDepth = this.searchDepth;
         }
         
-        this.score += action.value;
+        //this.score += action.value;
         
         return ret;
     }

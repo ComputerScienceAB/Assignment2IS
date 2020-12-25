@@ -70,7 +70,7 @@ public class Human extends Player {
                     if (this.action.isLegal(st, st.m_board[this.action.m_initPos.row][this.action.m_initPos.col])) {
                         this.invalidMovement = false;
                         ret = st.applyAction(this.action);
-                        this.score += Utils.getUtility(st, this.color);
+                        //this.score += Utils.getUtility(st, this.color);
                     } else {
                         System.out.println("Ilegal action");
                     }

@@ -71,7 +71,6 @@ public class ChessGame {
                 break;
             default:
                 player1 = new Agent("white", false, method, depth);
-                player2 = new Agent("black", true, method, depth);
                 break;
         }
 
@@ -85,6 +84,8 @@ public class ChessGame {
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");
                             }else if(player1.score < player2.score){
@@ -102,6 +103,8 @@ public class ChessGame {
                     state = player2.Move(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");
                             }else if(player1.score < player2.score){
@@ -122,6 +125,8 @@ public class ChessGame {
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (human) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
@@ -139,6 +144,8 @@ public class ChessGame {
                     state = player2.Move(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (human) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
@@ -159,6 +166,8 @@ public class ChessGame {
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
@@ -176,6 +185,8 @@ public class ChessGame {
                     state = player2.Move(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
+                            player1.score = Utils.getUtility(state, player1.color);
+                            player2.score = Utils.getUtility(state, player2.color);
                             if(player1.score > player2.score){
                                 System.out.println("***End of the game, the winner is: Player 1 (White AI) with "+player1.score+" points***");                                
                             }else if(player1.score < player2.score){
