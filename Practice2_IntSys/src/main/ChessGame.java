@@ -222,6 +222,13 @@ public class ChessGame {
                         System.exit(0);
                     }
                     System.out.println("Player 2 (dummy) does nothing");
+                    state.remainingMoves--;
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
+                        Utils.printBoard(state);
+                        System.exit(0);
+                    }
                     break;
             }
 

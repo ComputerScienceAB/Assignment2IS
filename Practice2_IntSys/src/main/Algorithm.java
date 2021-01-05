@@ -13,7 +13,6 @@ public class Algorithm {
     final int posInf = Integer.MAX_VALUE;
     final int negInf = Integer.MIN_VALUE;
 
-    int best = -44;
     int agentColor;
     Piece mPiece;
     int searchDepth;

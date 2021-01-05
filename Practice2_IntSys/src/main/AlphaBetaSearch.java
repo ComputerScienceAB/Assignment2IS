@@ -14,9 +14,7 @@ import java.util.Random;
  */
 public class AlphaBetaSearch extends Algorithm {
     
-    int alpha = negInf;
-   int beta = posInf;
-    
+   
     public AlphaBetaSearch(int c, int d){
         super(c,d);
     }
@@ -26,8 +24,9 @@ public class AlphaBetaSearch extends Algorithm {
         int i, rnd, v, buffer = 0;
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
-        ArrayList<Action> bestPossibleActions = new ArrayList<Action>();
-        v = this.negInf;
+        ArrayList<Action> bestPossibleActions = new ArrayList<Action>();        
+        int alpha = this.negInf;
+        int beta = this.posInf;
         for(i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
                 if(this.agentColor == 0){
@@ -36,7 +35,7 @@ public class AlphaBetaSearch extends Algorithm {
                         piecePossibleActions = this.mPiece.getPossibleActions(state);
                         if(piecePossibleActions != null){
                            totalPossibleActions.addAll(this.mPiece.getPossibleActions(state));
-                           }                      
+                        }                      
                     }
                 }else{
                     if((state.m_board[i][j] >= Utils.bPawn) && (state.m_board[i][j] <= Utils.bKing)){
@@ -50,10 +49,15 @@ public class AlphaBetaSearch extends Algorithm {
             }
         }
       
-
         for (i = 0; i < totalPossibleActions.size(); i++) {
             this.generatedStates++;
-            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
+            v = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
+            totalPossibleActions.get(i).value = v;
+            alpha = Math.max(alpha, v);
+        }
+        
+        v = this.negInf;
+        for(i = 0; i < totalPossibleActions.size(); i++){
             buffer = totalPossibleActions.get(i).value;
             if (buffer >= v) {
                 v = buffer;
@@ -72,12 +76,15 @@ public class AlphaBetaSearch extends Algorithm {
         
         return null;       
     } 
+
     
-    public int MaxValue(State state, int alpha, int beta, int depthLimit){
+
+    public int MaxValue(State state, int A, int B, int depthLimit){
+        int best;
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
-        //this.alpha = alpha;
-        //this.beta = beta;
+        int alpha = A;
+        int beta = B;
         if (state.isFinal() || depthLimit == 0) return Utils.getUtility(state,this.agentColor);
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
@@ -105,16 +112,17 @@ public class AlphaBetaSearch extends Algorithm {
             this.generatedStates++;
             best = Math.max(best, MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best >= beta) return best;
-            this.alpha = Math.max(alpha, best);
+            alpha = Math.max(alpha, best);
         }   
         return best;
     }
     
-    public int MinValue(State state, int alpha, int beta, int depthLimit){
+    public int MinValue(State state, int A, int B, int depthLimit){
+        int best;
         ArrayList<Action> piecePossibleActions = new ArrayList<Action>();
         ArrayList<Action> totalPossibleActions = new ArrayList<Action>();
-        //this.alpha = alpha;
-        //this.beta = beta;
+        int alpha = A;
+        int beta = B;
         if (state.isFinal() || depthLimit == 0) return Utils.getUtility(state,this.agentColor);
         for(int i=0; i<state.m_boardSize;i++){
             for(int j=0;j<state.m_boardSize;j++){
@@ -142,7 +150,7 @@ public class AlphaBetaSearch extends Algorithm {
             this.generatedStates++;
             best = Math.min(best, MaxValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, (depthLimit -1)));
             if (best <= alpha) return best;
-            this.beta = Math.min(beta, best);
+            beta = Math.min(beta, best);
         }
         return best;
     }
