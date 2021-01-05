@@ -20,6 +20,9 @@ public class ChessGame {
         int remainingMoves = 0;
         double probability = 0.0;
         int seed = -1;
+        float counterMoveTime = 0;
+        float startMoveTime;
+        float endMoveTime;
 
         Player player1 = null;
         Player player2 = null;
@@ -75,12 +78,16 @@ public class ChessGame {
         }
 
         System.out.println("White ones move first");
+        long startTime = System.nanoTime();
         while (true) {
             Utils.printBoard(state);
             switch (color) {
                 case "white":
                     System.out.println("Player 1 (AI) moves");
+                    startMoveTime = System.nanoTime();
                     state = player1.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
@@ -98,10 +105,16 @@ public class ChessGame {
                         }
                         System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }                   
                     System.out.println("Player 2 (human), it's your turn");
+                    startMoveTime = System.nanoTime();
                     state = player2.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             player1.score = Utils.getUtility(state, player1.color);
@@ -118,12 +131,18 @@ public class ChessGame {
                         }      
                         System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     break;
                 case "black":
                     System.out.println("Player 1 (human), it's your turn");
+                    startMoveTime = System.nanoTime();
                     state = player1.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
@@ -141,10 +160,16 @@ public class ChessGame {
                         }     
                         System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     System.out.println("Player 2 (AI) moves");
+                    startMoveTime = System.nanoTime();
                     state = player2.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             player1.score = Utils.getUtility(state, player1.color);
@@ -161,12 +186,18 @@ public class ChessGame {
                         }     
                         System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     break;
                 case "both":
                     System.out.println("Player 1 (AI) moves");
+                    startMoveTime = System.nanoTime();
                     state = player1.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
@@ -186,10 +217,16 @@ public class ChessGame {
                         System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         System.out.println("Total generated states: "+(player1.searchEngine.generatedStates + player2.searchEngine.generatedStates));
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     System.out.println("Player 2 (AI) moves");
+                    startMoveTime = System.nanoTime();
                     state = player2.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     if(state.isFinal()){
                         if(state.remainingMoves == 0){
                             player1.score = Utils.getUtility(state, player1.color);
@@ -208,20 +245,39 @@ public class ChessGame {
                         System.out.println("Generated states by Player 2: "+player2.searchEngine.generatedStates);
                         System.out.println("Total generated states: "+(player1.searchEngine.generatedStates + player2.searchEngine.generatedStates));
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     break;
                 case "dummy":
                     System.out.println("Player 1 (AI) moves");
+                    startMoveTime = System.nanoTime();
                     state = player1.Move(state);
+                    endMoveTime = System.nanoTime();
+                    counterMoveTime += (endMoveTime - startMoveTime);
                     Utils.printBoard(state);
                     if(state.isFinal()){
                         System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
                         System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
                         Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
                         System.exit(0);
                     }
                     System.out.println("Player 2 (dummy) does nothing");
+                    state.remainingMoves--;
+                    if(state.isFinal()){
+                        System.out.println("***End of the game, the winner is: Player 1 (White AI)***");
+                        System.out.println("Generated states by Player 1: "+player1.searchEngine.generatedStates);
+                        Utils.printBoard(state);
+                        long stopTime = System.nanoTime(); //STOP
+                        System.out.println("Execution time: "+((stopTime - startTime)/1000000)+ " miliseconds");
+                        System.out.println("Average move time: "+(counterMoveTime/(remainingMoves-state.remainingMoves)/1000000)+ " miliseconds");
+                        System.exit(0);
+                    }
                     break;
             }
 
