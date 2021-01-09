@@ -302,6 +302,73 @@ public class Utils {
             return blackscore-whitescore;
         }
         
+        
+        
+    }
+    
+    /**
+     * This is the method used to get a random utility between 100 and 900. Only for testing purpose
+     * @param state
+     * @param agentColor
+     * @return 
+     */
+    public static int getRandomUtility(State state, int agentColor) {
+        int whitescore = 0;
+        int blackscore = 0;
+        Random random = new Random();
+        int x = random.nextInt(900) + 100;
+        for (int i = 0; i < state.m_boardSize; i++) {
+            for (int j = 0; j < state.m_boardSize; j++) {
+                if (state.m_board[i][j] != Utils.empty) {
+                    if (state.m_board[i][j] >= Utils.wPawn && state.m_board[i][j] <= Utils.wKing) { //if the piece in that position is white
+                        if (state.m_board[i][j] == Utils.wPawn) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wRook) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wBishop) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wKnight) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wQueen) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.wKing) {
+                            whitescore += random.nextInt(900) + 100;
+                        }
+                    } else { //if piece is black
+                        if (state.m_board[i][j] == Utils.bPawn) {
+                            blackscore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bRook) {
+                            blackscore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bBishop) {
+                            blackscore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bKnight) {
+                            blackscore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bQueen) {
+                            blackscore += random.nextInt(900) + 100;
+                        }
+                        if (state.m_board[i][j] == Utils.bKing) {
+                            blackscore += random.nextInt(900) + 100;;
+                        }
+                    }
+                }
+            }
+        }
+        if(agentColor == 0){
+            return whitescore-blackscore;
+        }else{
+            return blackscore-whitescore;
+        }
+        
+        
     }
 
 } // end of class
