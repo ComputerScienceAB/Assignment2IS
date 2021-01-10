@@ -51,7 +51,7 @@ public class AlphaBetaSearch extends Algorithm {
       
         for (i = 0; i < totalPossibleActions.size(); i++) {
             this.generatedStates++;
-            v = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth);
+            v = MinValue(state.applyAction(totalPossibleActions.get(i)), alpha, beta, this.searchDepth - 1);
             totalPossibleActions.get(i).value = v;
             alpha = Math.max(alpha, v);
         }
