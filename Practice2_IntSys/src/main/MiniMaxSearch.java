@@ -50,7 +50,7 @@ public class MiniMaxSearch extends Algorithm{
 
         for (i = 0; i < totalPossibleActions.size(); i++) {
             this.generatedStates++;
-            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth);
+            totalPossibleActions.get(i).value = MinValue(state.applyAction(totalPossibleActions.get(i)), this.searchDepth - 1);
             
         }
 

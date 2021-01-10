@@ -19,29 +19,7 @@ public class Action {
         this.m_finalPos = new Position(-1, -1);
     }
 
-    /**
-     * This method checks that the action chosen by the human player doesn't
-     * contain out-of-bounds positions
-     *
-     * @param boardSize
-     * @return
-     */
-    public boolean isValid(int boardSize) {
 
-        boolean ret = false;
-
-        if (this.m_initPos.row >= 0 && this.m_initPos.row < boardSize) {
-            if (this.m_initPos.col >= 0 && this.m_initPos.col < boardSize) {
-                if (this.m_finalPos.row >= 0 && this.m_finalPos.row < boardSize) {
-                    if (this.m_finalPos.col >= 0 && this.m_finalPos.col < boardSize) {
-                        ret = true;
-                    }
-                }
-            }
-        }
-
-        return ret;
-    }
 
     /**
      * This method compares the action specified by the human player with the possible actions of the chosen piece, and returns true if it is legal
