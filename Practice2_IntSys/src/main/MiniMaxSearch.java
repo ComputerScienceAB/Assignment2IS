@@ -54,6 +54,7 @@ public class MiniMaxSearch extends Algorithm{
             
         }
 
+        v = this.negInf;
         for (i = 0; i < totalPossibleActions.size(); i++) {
             buffer = totalPossibleActions.get(i).value;
             if (buffer >= v) {

@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Human extends Player {
 
-    //Scanner keyboard = new Scanner(System.in).useDelimiter("[,\\s+]");
+
     Scanner keyboard = new Scanner(System.in);
     State ret;
     Action action;
